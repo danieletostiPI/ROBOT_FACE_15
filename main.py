@@ -47,12 +47,13 @@ if __name__ == "__main__":
         success, img = cap.read()
         result, box_array = getObjects(img, thres, nmsthres, objects = ['person'])
         #print(box_array)  # x, y (angolo alto sinistra), width,height
-        if len(box_array) != 0:
-            x = box_array[0][0][0]
-            y = box_array[0][0][1]
-            w = box_array[0][0][2]
-            h = box_array[0][0][3]
-        else:
+        try:
+            if len(box_array) != 0:
+                x = box_array[0][0][0]
+                y = box_array[0][0][1]
+                w = box_array[0][0][2]
+                h = box_array[0][0][3]
+        except:
             x = 0
             y = 0
             h = 0
