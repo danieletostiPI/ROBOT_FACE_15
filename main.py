@@ -48,8 +48,9 @@ def rotate_right(dc1, inc):
         dc1 = 9
     else:
         dc1 = dc1 - inc
+    print("ROT RIGHT")
     servo_rot.ChangeDutyCycle(dc1 / 4)
-    time.sleep(0.02)
+    time.sleep(0.05)
     servo_rot.ChangeDutyCycle(0)
     return dc1
 
@@ -59,8 +60,9 @@ def rotate_left(dc1, inc):
         dc1 = 42
     else:
         dc1 = dc1 + inc
+    print("ROT LEFT")
     servo_rot.ChangeDutyCycle(dc1 / 4)
-    time.sleep(0.02)
+    time.sleep(0.05)
     servo_rot.ChangeDutyCycle(0)
     return dc1
 #----------------------------------------------------------------------------------------------
@@ -151,7 +153,7 @@ if __name__ == "__main__":
                     inc = 1
                 dc1 = rotate_left(dc1, inc)
                 time.sleep(0.005)
-                print("Increase right :", inc)
+                #print("Increase right :", inc)
             if dc1 <= 9:
                 enabler = 0
 
@@ -169,7 +171,7 @@ if __name__ == "__main__":
                     inc = 1
                 dc1 = rotate_right(dc1, inc)
                 time.sleep(0.005)
-                print("Increase left :", inc)
+                #print("Increase left :", inc)
             if dc1 >= 42:
                 enablel = 0
         #cv2.imshow("Output", img)
