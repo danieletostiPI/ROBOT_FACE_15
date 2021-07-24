@@ -150,7 +150,7 @@ if __name__ == "__main__":
                 else:
                     inc = 1
                 dc1 = rotate_right(dc1, inc)
-                time.sleep(inc * 0.005)
+                time.sleep(inc * 0.01)
                 print("Increase right %d", inc)
             if dc1 <= 9:
                 enabler = 0
