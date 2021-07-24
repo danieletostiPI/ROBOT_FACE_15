@@ -4,7 +4,7 @@ import numpy as np
 thres = 0.45 # Threshold to detect object
 nmsthres = 0.1
 
-
+#/home/danieletostiPI/ROBOT_FACE_15/
 classNames= []
 classFile = '/home/danieletostiPI/ROBOT_FACE_15/coco.names'
 with open(classFile,'rt') as f:
@@ -20,46 +20,45 @@ net.setInputMean((127.5, 127.5, 127.5))
 net.setInputSwapRB(True)
 
 def getObjects(img ,thres, nmsthres, objects = []):
-    try:
-        classIds, confs, bbox = net.detect(img, confThreshold=thres, nmsThreshold=nmsthres)
-        #print(classIds,bbox)
-        ObjectInfo = []
+    classIds, confs, bbox = net.detect(img, confThreshold=thres, nmsThreshold=nmsthres)
+    #print(classIds,bbox)
+    ObjectInfo = []
 
-        if len(classIds) != 0:
-            for classId, confidence, box in zip(classIds.flatten(), confs.flatten(), bbox):
-                className = classNames[classId - 1]
-                if className in objects:
-                    ObjectInfo.append([box])
-                    cv2.rectangle(img,box,color=(0,0,255),thickness=2)
-    except:
-        print("Empty")
-        img = 0
-        ObjectInfo = 0
+    if len(classIds) != 0:
+        for classId, confidence, box in zip(classIds.flatten(), confs.flatten(), bbox):
+            className = classNames[classId - 1]
+            if className in objects:
+                ObjectInfo.append([box])
+                cv2.rectangle(img,box,color=(0,0,255),thickness=2)
     return img, ObjectInfo
 
 
 if __name__ == "__main__":
-    cap = cv2.VideoCapture(-1,2)
-    cap.set(3, 640)
-    cap.set(4, 480)
+    cap = cv2.VideoCapture(0)
+    cap.set(3, 1280)
+    cap.set(4, 720)
 
     while True:
-        success, img = cap.read()
-        result, box_array = getObjects(img, thres, nmsthres, objects = ['person'])
-        #print(box_array)  # x, y (angolo alto sinistra), width,height
         try:
+            success, img = cap.read()
+            result, box_array = getObjects(img, thres, nmsthres, objects = ['person'])
+            #print(box_array)  # x, y (angolo alto sinistra), width,height
             if len(box_array) != 0:
                 x = box_array[0][0][0]
                 y = box_array[0][0][1]
                 w = box_array[0][0][2]
                 h = box_array[0][0][3]
+            else:
+                x = 0
+                y = 0
+                h = 0
+                w = 0
+            xcenter = x + w / 2
+            ycenter = y + h / 2
         except:
-            x = 0
-            y = 0
-            h = 0
-            w = 0
-        xcenter = x + w / 2
-        ycenter = y + h / 2
+            xcenter = 0
+            ycenter = 0
+            print("Empty")
         print(xcenter)
         print(ycenter)
 
