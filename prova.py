@@ -6,12 +6,12 @@ nmsthres = 0.1
 
 
 classNames= []
-classFile = '/home/danieletostiPI/ROBOT_FACE_15/coco.names'
+classFile = 'coco.names'
 with open(classFile,'rt') as f:
     classNames = f.read().rstrip('\n').split('\n')
 
-configPath = '/home/danieletostiPI/ROBOT_FACE_15/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
-weightsPath = '/home/danieletostiPI/ROBOT_FACE_15/frozen_inference_graph.pb'
+configPath = 'ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
+weightsPath = 'frozen_inference_graph.pb'
 
 net = cv2.dnn_DetectionModel(weightsPath,configPath)
 net.setInputSize(320,320)
@@ -20,7 +20,6 @@ net.setInputMean((127.5, 127.5, 127.5))
 net.setInputSwapRB(True)
 
 def getObjects(img ,thres, nmsthres, objects = []):
-    box = []
     classIds, confs, bbox = net.detect(img, confThreshold=thres, nmsThreshold=nmsthres)
     #print(classIds,bbox)
     ObjectInfo = []
