@@ -95,9 +95,9 @@ if __name__ == "__main__":
     cap = cv2.VideoCapture(0)
     cap.set(3, xres)
     cap.set(4, yres)
-
+    print("Paletto 1")
     while go:
-        print("Paletto 1")
+        servo_rot.ChangeDutyCycle(0)
         # --------------------------
         stop = GP.input(BUTTON_STOP)
         GP.output(LEDG, GP.HIGH)
@@ -106,9 +106,7 @@ if __name__ == "__main__":
             GP.output(LEDG, GP.LOW)
             print("Well Done")
         # --------------------------
-        print("Paletto 2")
         try:
-            print("Paletto 3")
             success, img = cap.read()
             result, box_array = getObjects(img, thres, nmsthres, objects = ['person'])
             #print(box_array)  # x, y (angolo alto sinistra), width,height
@@ -139,7 +137,6 @@ if __name__ == "__main__":
         elif xcenter != 0 and ycenter != 0 and spin == 1:
             print("Stop motor and continue")
             spin = 0
-        print("Paletto 4")
         if xcenter < xres / 2 - 50 and spin == 0:
             # print("gira a destra")
             enablel = 1
@@ -154,7 +151,7 @@ if __name__ == "__main__":
                     inc = 1
                 dc1 = rotate_right(dc1, inc)
                 time.sleep(inc * 0.05)
-                print("Increase right %d", inc)
+                print("Increase right :", inc)
             if dc1 <= 9:
                 enabler = 0
 
@@ -172,9 +169,8 @@ if __name__ == "__main__":
                     inc = 1
                 dc1 = rotate_left(dc1, inc)
                 time.sleep(inc * 0.05)
-                print("Increase left %d", inc)
+                print("Increase left :", inc)
             if dc1 >= 42:
                 enablel = 0
-        print("Paletto 4")
         #cv2.imshow("Output", img)
         cv2.waitKey(1)
