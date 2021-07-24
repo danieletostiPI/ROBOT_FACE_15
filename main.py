@@ -149,7 +149,7 @@ if __name__ == "__main__":
                     inc = 2
                 else:
                     inc = 1
-                dc1 = rotate_right(dc1, inc)
+                dc1 = rotate_left(dc1, inc)
                 time.sleep(inc * 0.05)
                 print("Increase right :", inc)
             if dc1 <= 9:
@@ -167,7 +167,7 @@ if __name__ == "__main__":
                     inc = 2
                 else:
                     inc = 1
-                dc1 = rotate_left(dc1, inc)
+                dc1 = rotate_right(dc1, inc)
                 time.sleep(inc * 0.05)
                 print("Increase left :", inc)
             if dc1 >= 42:
