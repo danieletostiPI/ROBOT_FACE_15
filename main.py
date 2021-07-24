@@ -21,7 +21,7 @@ net.setInputSwapRB(True)
 
 def getObjects(img ,thres, nmsthres, objects = []):
 
-    classIds, confs, bbox = net.detect(img,cv2.INTER_AREA, confThreshold=thres, nmsThreshold=nmsthres)
+    classIds, confs, bbox = net.detect(img, confThreshold=thres, nmsThreshold=nmsthres)
     #print(classIds,bbox)
     ObjectInfo = []
 
@@ -36,8 +36,8 @@ def getObjects(img ,thres, nmsthres, objects = []):
 
 if __name__ == "__main__":
     cap = cv2.VideoCapture(-1,2)
-    cap.set(3, 640)
-    cap.set(4, 480)
+    cap.set(3, 320)
+    cap.set(4, 320)
 
     while True:
         success, img = cap.read()
