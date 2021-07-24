@@ -82,6 +82,9 @@ def getObjects(img ,thres, nmsthres, objects = []):
 go = True
 stop = True
 spin = 0
+enablel = 1
+enabler = 1
+
 xres = 800
 yres = 450
 #----------------------------------------------------------------------------------------------
