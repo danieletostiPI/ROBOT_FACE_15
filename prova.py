@@ -4,14 +4,14 @@ import numpy as np
 thres = 0.45 # Threshold to detect object
 nmsthres = 0.1
 
-#/home/danieletostiPI/ROBOT_FACE_15/
+
 classNames= []
-classFile = 'coco.names'
+classFile = '/home/danieletostiPI/ROBOT_FACE_15/coco.names'
 with open(classFile,'rt') as f:
     classNames = f.read().rstrip('\n').split('\n')
 
-configPath = 'ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
-weightsPath = 'frozen_inference_graph.pb'
+configPath = '/home/danieletostiPI/ROBOT_FACE_15/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
+weightsPath = '/home/danieletostiPI/ROBOT_FACE_15/frozen_inference_graph.pb'
 
 net = cv2.dnn_DetectionModel(weightsPath,configPath)
 net.setInputSize(320,320)
