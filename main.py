@@ -35,8 +35,8 @@ def getObjects(img ,thres, nmsthres, objects = []):
 
 if __name__ == "__main__":
     cap = cv2.VideoCapture(-1,cv2.CAP_V4L)
-    cap.set(3, 1280)
-    cap.set(4, 720)
+    cap.set(3, 640)
+    cap.set(4, 480)
 
     while True:
         success, img = cap.read()
