@@ -7,7 +7,7 @@ GP.setmode(GP.BOARD)
 GP.setwarnings(False)
 
 thres = 0.45 # Threshold to detect object
-nmsthres = 0.1
+nmsthres = 0.01
 
 #/home/danieletostiPI/ROBOT_FACE_15/
 classNames= []
