@@ -168,7 +168,7 @@ if __name__ == "__main__":
                 else:
                     inc = 1
                 dc1 = rotate_left(dc1, inc)
-                time.sleep(inc * 0.005)
+                time.sleep(inc * 0.01)
                 print("Increase left %d", inc)
             if dc1 >= 42:
                 enablel = 0
