@@ -33,6 +33,8 @@ def getObjects(img ,thres, nmsthres, objects = []):
                     cv2.rectangle(img,box,color=(0,0,255),thickness=2)
     except:
         print("Empty")
+        img = 0
+        ObjectInfo = 0
     return img, ObjectInfo
 
 
