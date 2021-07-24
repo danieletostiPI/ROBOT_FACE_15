@@ -1,5 +1,10 @@
 import cv2
 import numpy as np
+import time
+import RPi.GPIO as GP
+
+GP.setmode(GP.BOARD)
+GP.setwarnings(False)
 
 thres = 0.45 # Threshold to detect object
 nmsthres = 0.1
@@ -19,6 +24,11 @@ net.setInputScale(1.0/ 127.5)
 net.setInputMean((127.5, 127.5, 127.5))
 net.setInputSwapRB(True)
 
+#----------------------------------------------------------------------------------------------
+LEDG = 16
+BUTTON_STOP = 18
+#----------------------------------------------------------------------------------------------
+
 def getObjects(img ,thres, nmsthres, objects = []):
     classIds, confs, bbox = net.detect(img, confThreshold=thres, nmsThreshold=nmsthres)
     #print(classIds,bbox)
@@ -32,13 +42,23 @@ def getObjects(img ,thres, nmsthres, objects = []):
                 cv2.rectangle(img,box,color=(0,0,255),thickness=2)
     return img, ObjectInfo
 
+go = True
+stop = True
 
 if __name__ == "__main__":
     cap = cv2.VideoCapture(0)
     cap.set(3, 1280)
     cap.set(4, 720)
 
-    while True:
+    while go:
+        # --------------------------
+        stop = GP.input(BUTTON_STOP)
+        GP.output(LEDG, GP.HIGH)
+        if not stop:
+            go = False
+            GP.output(LEDG, GP.LOW)
+            print("Well Done")
+        # --------------------------
         try:
             success, img = cap.read()
             result, box_array = getObjects(img, thres, nmsthres, objects = ['person'])
