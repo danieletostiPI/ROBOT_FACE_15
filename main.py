@@ -7,7 +7,7 @@ GP.setmode(GP.BOARD)
 GP.setwarnings(False)
 
 thres = 0.45 # Threshold to detect object
-nmsthres = 0.01
+nmsthres = 0.1
 
 #/home/danieletostiPI/ROBOT_FACE_15/
 classNames= []
@@ -87,8 +87,8 @@ spin = 0
 enablel = 1
 enabler = 1
 
-xres = 800
-yres = 450
+xres = 640
+yres = 480
 
 servo_rot.start(6.8)
 #----------------------------------------------------------------------------------------------
@@ -143,11 +143,11 @@ if __name__ == "__main__":
             # print("gira a destra")
             enablel = 1
             if enabler == 1:
-                if xcenter < xres / 2 - 300:
+                if xcenter < xres / 2 - 200:
                     inc = 6
-                elif xcenter < xres / 2 - 200:
+                elif xcenter < xres / 2 - 150:
                     inc = 4
-                elif xcenter < xres / 2 - 100:
+                elif xcenter < xres / 2 - 90:
                     inc = 2
                 else:
                     inc = 1
@@ -161,11 +161,11 @@ if __name__ == "__main__":
             # print("gira a sinistra")
             enabler = 1
             if enablel == 1:
-                if xcenter > xres / 2 + 300:
+                if xcenter > xres / 2 + 200:
                     inc = 6
-                elif xcenter > xres / 2 + 200:
+                elif xcenter > xres / 2 + 150:
                     inc = 4
-                elif xcenter > xres / 2 + 100:
+                elif xcenter > xres / 2 + 90:
                     inc = 2
                 else:
                     inc = 1
