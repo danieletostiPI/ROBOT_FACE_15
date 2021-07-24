@@ -78,10 +78,13 @@ def getObjects(img ,thres, nmsthres, objects = []):
                 cv2.rectangle(img,box,color=(0,0,255),thickness=2)
     return img, ObjectInfo
 
+#----------------------------------------------------------------------------------------------
 go = True
 stop = True
+spin = 0
 xres = 800
 yres = 450
+#----------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     cap = cv2.VideoCapture(0)
