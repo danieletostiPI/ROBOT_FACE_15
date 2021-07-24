@@ -59,5 +59,5 @@ if __name__ == "__main__":
         print(ycenter)
 
 
-        cv2.imshow("Output", img)
+        #cv2.imshow("Output", img)
         cv2.waitKey(1)
