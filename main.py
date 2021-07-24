@@ -37,7 +37,7 @@ GP.setup(BUTTON_STOP, GP.IN, pull_up_down=GP.PUD_UP)  # Se Button = 0, bottone p
 
 servo_rot = GP.PWM(SERVO_ROT, 50)  # 50 Hz
 
-#servo_rot.ChangeDutyCycle(0)  # fermo # va da 2.2 a 12.25
+#servo_rot.ChangeDutyCycle(0)  # fermo # va da 2.2 a 12
 #servo_lat.ChangeDutyCycle(0)
 
 DutyCycle1 = 27
@@ -118,13 +118,14 @@ if __name__ == "__main__":
             xcenter = 0
             ycenter = 0
             print("Empty")
+
         print("Xcenter = ",xcenter)
         print("Ycenter = ",ycenter)
 
-        if xcenter == 0 and ycenter == 0:
+        if xcenter == 0 and ycenter == 0 and spin == 0:
             print("Spin")
             spin = 1
-        if xcenter != 0 and ycenter != 0 and spin == 1:
+        elif xcenter != 0 and ycenter != 0 and spin == 1:
             print("Stop motor and continue")
             spin = 0
 
