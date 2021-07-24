@@ -22,17 +22,17 @@ net.setInputSwapRB(True)
 def getObjects(img ,thres, nmsthres, objects = []):
     try:
         classIds, confs, bbox = net.detect(img, confThreshold=thres, nmsThreshold=nmsthres)
+        #print(classIds,bbox)
+        ObjectInfo = []
+
+        if len(classIds) != 0:
+            for classId, confidence, box in zip(classIds.flatten(), confs.flatten(), bbox):
+                className = classNames[classId - 1]
+                if className in objects:
+                    ObjectInfo.append([box])
+                    cv2.rectangle(img,box,color=(0,0,255),thickness=2)
     except:
         print("Empty")
-    #print(classIds,bbox)
-    ObjectInfo = []
-
-    if len(classIds) != 0:
-        for classId, confidence, box in zip(classIds.flatten(), confs.flatten(), bbox):
-            className = classNames[classId - 1]
-            if className in objects:
-                ObjectInfo.append([box])
-                cv2.rectangle(img,box,color=(0,0,255),thickness=2)
     return img, ObjectInfo
 
 
