@@ -20,7 +20,8 @@ net.setInputMean((127.5, 127.5, 127.5))
 net.setInputSwapRB(True)
 
 def getObjects(img ,thres, nmsthres, objects = []):
-    classIds, confs, bbox = net.detect(img, confThreshold=thres, nmsThreshold=nmsthres)
+
+    classIds, confs, bbox = net.detect(img,cv2.INTER_AREA, confThreshold=thres, nmsThreshold=nmsthres)
     #print(classIds,bbox)
     ObjectInfo = []
 
