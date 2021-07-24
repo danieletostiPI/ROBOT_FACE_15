@@ -27,6 +27,9 @@ net.setInputSwapRB(True)
 #----------------------------------------------------------------------------------------------
 LEDG = 16
 BUTTON_STOP = 18
+
+GP.setup(LEDG, GP.OUT)
+GP.setup(BUTTON_STOP, GP.IN, pull_up_down=GP.PUD_UP)  # Se Button = 0, bottone pigiato.
 #----------------------------------------------------------------------------------------------
 
 def getObjects(img ,thres, nmsthres, objects = []):
