@@ -1,16 +1,17 @@
 import cv2
+import numpy as np
 
 thres = 0.45 # Threshold to detect object
 nmsthres = 0.1
 
-#/home/danieletostiPI/ROBOT_FACE_15/
+
 classNames= []
-classFile = 'coco.names'
+classFile = '/home/danieletostiPI/ROBOT_FACE_15/coco.names'
 with open(classFile,'rt') as f:
     classNames = f.read().rstrip('\n').split('\n')
 
-configPath = 'ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
-weightsPath = 'frozen_inference_graph.pb'
+configPath = '/home/danieletostiPI/ROBOT_FACE_15/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt'
+weightsPath = '/home/danieletostiPI/ROBOT_FACE_15/frozen_inference_graph.pb'
 
 net = cv2.dnn_DetectionModel(weightsPath,configPath)
 net.setInputSize(320,320)
@@ -41,11 +42,22 @@ if __name__ == "__main__":
     while True:
         success, img = cap.read()
         result, box_array = getObjects(img, thres, nmsthres, objects = ['person'])
-        print(box_array)  # x, y (angolo alto sinistra), width,height
+        #print(box_array)  # x, y (angolo alto sinistra), width,height
         if len(box_array) != 0:
             x = box_array[0][0][0]
             y = box_array[0][0][1]
             w = box_array[0][0][2]
             h = box_array[0][0][3]
+        else:
+            x = 0
+            y = 0
+            h = 0
+            w = 0
+        xcenter = x + w / 2
+        ycenter = y + h / 2
+        print(xcenter)
+        print(ycenter)
+
+
         cv2.imshow("Output", img)
         cv2.waitKey(1)
