@@ -82,8 +82,8 @@ if __name__ == "__main__":
             xcenter = 0
             ycenter = 0
             print("Empty")
-        print(xcenter)
-        print(ycenter)
+        print("Xcenter = %f",xcenter)
+        print("Ycenter = %f",ycenter)
 
 
         #cv2.imshow("Output", img)
