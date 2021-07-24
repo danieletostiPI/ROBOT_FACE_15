@@ -28,8 +28,41 @@ net.setInputSwapRB(True)
 LEDG = 16
 BUTTON_STOP = 18
 
+SERVO_ROT = 32
+
 GP.setup(LEDG, GP.OUT)
+GP.setup(SERVO_ROT, GP.OUT)
+
 GP.setup(BUTTON_STOP, GP.IN, pull_up_down=GP.PUD_UP)  # Se Button = 0, bottone pigiato.
+
+servo_rot = GP.PWM(SERVO_ROT, 50)  # 50 Hz
+
+#servo_rot.ChangeDutyCycle(0)  # fermo # va da 2.2 a 12.25
+#servo_lat.ChangeDutyCycle(0)
+
+DutyCycle1 = 27
+dc1 = float(DutyCycle1)
+
+def rotate_right(dc1, inc):
+    if dc1 <= 9:
+        dc1 = 9
+    else:
+        dc1 = dc1 - inc
+    servo_rot.ChangeDutyCycle(dc1 / 4)
+    time.sleep(0.02)
+    servo_rot.ChangeDutyCycle(0)
+    return dc1
+
+
+def rotate_left(dc1, inc):
+    if dc1 >= 42:
+        dc1 = 42
+    else:
+        dc1 = dc1 + inc
+    servo_rot.ChangeDutyCycle(dc1 / 4)
+    time.sleep(0.02)
+    servo_rot.ChangeDutyCycle(0)
+    return dc1
 #----------------------------------------------------------------------------------------------
 
 def getObjects(img ,thres, nmsthres, objects = []):
@@ -47,11 +80,13 @@ def getObjects(img ,thres, nmsthres, objects = []):
 
 go = True
 stop = True
+xres = 800
+yres = 450
 
 if __name__ == "__main__":
     cap = cv2.VideoCapture(0)
-    cap.set(3, 960)
-    cap.set(4, 540)
+    cap.set(3, xres)
+    cap.set(4, yres)
 
     while go:
         # --------------------------
@@ -78,13 +113,56 @@ if __name__ == "__main__":
                 w = 0
             xcenter = x + w / 2
             ycenter = y + h / 2
+
         except:
             xcenter = 0
             ycenter = 0
             print("Empty")
-        print("Xcenter = %f",xcenter)
-        print("Ycenter = %f",ycenter)
+        print("Xcenter = ",xcenter)
+        print("Ycenter = ",ycenter)
 
+        if xcenter == 0 and ycenter == 0:
+            print("Spin")
+            spin = 1
+        if xcenter != 0 and ycenter != 0 and spin == 1:
+            print("Stop motor and continue")
+            spin = 0
+
+        if xcenter < xres / 2 - 50 and spin == 0:
+            # print("gira a destra")
+            enablel = 1
+            if enabler == 1:
+                if xcenter < xres / 2 - 300:
+                    inc = 6
+                elif xcenter < xres / 2 - 200:
+                    inc = 4
+                elif xcenter < xres / 2 - 100:
+                    inc = 2
+                else:
+                    inc = 1
+                dc1 = rotate_right(dc1, inc)
+                time.sleep(inc * 0.005)
+                print("Increase right %d", inc)
+            if dc1 <= 9:
+                enabler = 0
+
+        elif xcenter > xres / 2 + 50 and spin == 0:
+            # print("gira a sinistra")
+            enabler = 1
+            if enablel == 1:
+                if xcenter > xres / 2 + 300:
+                    inc = 6
+                elif xcenter > xres / 2 + 200:
+                    inc = 4
+                elif xcenter > xres / 2 + 100:
+                    inc = 2
+                else:
+                    inc = 1
+                dc1 = rotate_left(dc1, inc)
+                time.sleep(inc * 0.005)
+                print("Increase left %d", inc)
+            if dc1 >= 42:
+                enablel = 0
 
         #cv2.imshow("Output", img)
         cv2.waitKey(1)
