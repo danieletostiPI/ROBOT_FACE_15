@@ -87,8 +87,8 @@ spin = 0
 enablel = 1
 enabler = 1
 
-xres = 640
-yres = 320
+xres = 320
+yres = 180
 
 servo_rot.start(6.8)
 #----------------------------------------------------------------------------------------------
@@ -139,15 +139,15 @@ if __name__ == "__main__":
         elif xcenter != 0 and ycenter != 0 and spin == 1:
             print("Stop motor and continue")
             spin = 0
-        if xcenter < xres / 2 - 50 and spin == 0:
+        if xcenter < xres / 2 - 30 and spin == 0:
             # print("gira a destra")
             enablel = 1
             if enabler == 1:
-                if xcenter < xres / 2 - 200:
+                if xcenter < xres / 2 - 110:
                     inc = 6
-                elif xcenter < xres / 2 - 150:
-                    inc = 4
                 elif xcenter < xres / 2 - 90:
+                    inc = 4
+                elif xcenter < xres / 2 - 60:
                     inc = 2
                 else:
                     inc = 1
@@ -157,15 +157,15 @@ if __name__ == "__main__":
             if dc1 <= 9:
                 enabler = 0
 
-        elif xcenter > xres / 2 + 50 and spin == 0:
+        elif xcenter > xres / 2 + 30 and spin == 0:
             # print("gira a sinistra")
             enabler = 1
             if enablel == 1:
-                if xcenter > xres / 2 + 200:
+                if xcenter > xres / 2 + 110:
                     inc = 6
-                elif xcenter > xres / 2 + 150:
-                    inc = 4
                 elif xcenter > xres / 2 + 90:
+                    inc = 4
+                elif xcenter > xres / 2 + 60:
                     inc = 2
                 else:
                     inc = 1
